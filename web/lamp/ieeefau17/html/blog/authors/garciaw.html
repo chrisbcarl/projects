@@ -1,0 +1,23 @@
+<div id="garciaw" class="text-center">
+    <img class="img-circle img-responsive img-center" src="html/blog/authors/garciaw.jpg" alt="" >
+    <h3>Washington Garcia
+        <small>Author</small>
+    </h3>
+    <p>IEEE's president from 2015 to 2016 comes to us with a few fantastic words.</p>
+    <button id="back_to_toc" type="button" class="btn btn-default">Back to TOC</button>
+</div>
+
+<script type="text/javascript">
+$("#back_to_toc").click(function(){
+    console.log("#back_to_toc" + " clicked");
+    $("#content").load("html/blog/toc.html");
+    $("#content").show();
+    //toggle_bg_off();
+    $(".dropdown-menu li a").removeClass("selected");
+    $("#back_to_toc").addClass("selected");
+    if ($("#back_to_toc").is("a")) {
+        $(".navbar-collapse").collapse("hide");
+    }
+    $(".dropdown-toggle").blur()
+});
+</script>

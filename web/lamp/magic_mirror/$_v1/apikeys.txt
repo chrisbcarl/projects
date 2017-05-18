@@ -1,0 +1,22 @@
+https://newsapi.org/account:
+u: chrisbcarl@outlook.com
+p: Pokemon069
+k: a0c3e24a619340d681fde23c21b15ab9
+e: https://newsapi.org/v1/articles?source=the-next-web&sortBy=latest&apiKey=a0c3e24a619340d681fde23c21b15ab9
+
+
+https://home.openweathermap.org/api_keys
+u:
+p:
+k: 4469f2c9ca55b23bbff54608bd5b498e
+e: http://api.openweathermap.org/data/2.5/weather?zip=33486,us&appid=4469f2c9ca55b23bbff54608bd5b498e
+
+instagram
+u: chrisbcarl
+p: Octavarium069!
+k: e9b0d408e7454a85852062c1651428ec
+
+google calendar
+u: chrisbcarl@gmail.com
+p: reg pass
+k: 524863905376-d3jh48u2b9o2l67954g00smj7afu7gme.apps.googleusercontent.com

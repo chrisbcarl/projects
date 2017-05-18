@@ -1,0 +1,193 @@
+<div class="row  " id="mainbody">
+
+    <!-- Blog Post Content Column -->
+    <div class="col-lg-8">
+
+        <!-- Blog Post -->
+        <div style="text-align:center">
+            <!-- Title -->
+            <h1>IR Laser Gun Project </h1>
+
+            <!-- Author -->
+            <p class="lead">
+                by <a href="#"></a>Victor Herrera-Ramirez
+            </p>
+        </div>
+
+        <!-- Date/Time -->
+        <p><span class="glyphicon glyphicon-time"></span> Posted on February 2, 2017</p>
+        <!-- Post Intro -->
+        <p class="lead">I have been working with an Arduino Uno microcontroller to create an IR laser gun like what is typically found in game rooms.</p>
+
+        <!-- Blog Image
+        <img src="http://placehold.it/150x100" height="100" width="150" alt="Image" style="float: left; margin: 4px 10px 0px 0px; border: 1px solid #000000;">
+-->
+        <!--- Post Content -->
+
+
+        <p> One of my favorite games has always been paintball, but I often am unable to play because of the high cost of the game, and because many of my friends are afraid that it might be painful to play. (Which it's not). </p>
+        <p> To make a game that I can join with all my friends and which I can play whenever. I have been working with an Arduino Uno microcontroller to create an IR laser gun like what is typically found in game rooms. </p>
+        <p> While it is my hope to use this page to document the build of this project, I am still near the beginning of the project, and for the time being I will present background information and my first steps. </p>
+
+
+        <h3>IR communication</h3>
+        <p>Firstly, what is Infrared light?</p>
+        <p> Infrared light is the portion of the electromagnetic wave spectrum with a longer wavelength than visible light, but shorter than microwaves. While. For the most part, this band of the electromagnetic spectrum is not visible to the unassisted human eye, it is possible for some people to see those wavelengths up to 1065nm under controlled conditions. </p>
+
+        <br>
+        <table>
+          <tbody><tr>
+            <th>Wave Class</th>
+            <th>Frequency</th>
+            <th>Wavelength</th>
+          </tr>
+          <tr>
+            <td>Near ultraviolet</td>
+            <td>.8-30 PHz</td>
+            <td>300–400nm</td>
+          </tr>
+          <tr>
+            <td>Near infrared</td>
+            <td>214–400 THz</td>
+            <td>0.75–1.4 µm</td>
+          </tr>
+          <tr>
+            <td>Mid infrared</td>
+            <td>37–100 THz</td>
+            <td>3–8 µm</td>
+          </tr>
+          <tr>
+            <td>Far infrared</td>
+            <td>0.3–20 THz</td>
+            <td>15–1000 µm</td>
+          </tr>
+          <tr>
+            <td>Extremely high frequency Microwave</td>
+            <td>30-300 GHz</td>
+            <td>1 cm to 1 mm</td>
+          </tr>
+        </tbody></table>
+        <br>
+
+        <p>For the rest of us, we need some form of aid to see infrared lights, the most well-known is through “night vision” goggles. Since I don’t have any specialized equipment, I used my phone’s camera to view the infrared from my LEDs. With the use of a camera, it is possible for us to see near infrared light, which thankfully, is what most IR communication uses. You can try this by looking through a phone's camera into the transmitter of a remote control as you press a button. </p>
+        <figure><img src="assets/blog/infrared_light.jpg" height="250" width="333"><figcaption><center>visible infrared light</center><figcaption></figcaption></figcaption></figure>
+        <p>The IR LEDs I will be using have a wavelength of 980nanometers, and would fall into the range of what is called near- infrared since it is closer to the wavelength of red (780nm) than to a microwave (1mm). Note, the boundary between what is near infrared and what is far infrared may vary depending on which field you are in, or who you talk to. </p>
+
+        <h3>How to “communicate” </h3>
+        <p>IR is actually a pretty effective way to communicate, it is used in households in the form of small appliances like television remotes, and is even used in optical fiber communication systems. </p>
+        <p>Typically, IR communication is modulated at a 38kHz signal to be useful for communication. There is actually a lot of ambient infrared in the environment. Anything that produces heat is producing infrared light. The sun, light bulbs, and even your own body heat are sources of infrared light. </p>
+        <figure><img src="assets/blog/Thermal_image.jpg" height="250" width="333"><figcaption><center>A thermal image of your hand shown by infrared light</center><figcaption></figcaption></figcaption></figure>
+        <p>With modulation, we distinguish between an actual signal, and the environment. Now we can use a protocol. I use the NEC protocol since it is very well established and used by many companies throughout the world, not just in Japan, where it was created. IR communication is very similar to how computers communicate, everything is a string of 1’s and 0’s. </p>
+        <p>Logical '0' – a 562.5µs pulse burst followed by a 562.5µs space, with a total transmit time of 1.125ms </p>
+        <p>Logical '1' – a 562.5µs pulse burst followed by a 1.6875ms space, with a total transmit time of 2.25ms </p>
+
+        <h3>Anatomy of a signal.</h3>
+        <p>According to the NEC protocol, a transmission is started with a leader code, which is a burst with a length of 9 ms, followed by a pause of 4.5 ms and then the data word. Within the data word, the address and the data bits are transmitted twice, first as a normal byte and immediately after as an inverted byte. </p>
+
+        <p> More information about general IR communication can be found at: <a href="https://learn.sparkfun.com/tutorials/ir-communication"> SparkFun-IR Communication</a></p>
+
+        <h3>The build</h3>
+        <p>Materials Used</p>
+        <ul>
+          <li>lens</li>
+          <li>IR emitter</li>
+          <li>buzzer</li>
+          <li>buttons</li>
+          <li>transistors</li>
+          <li>IR sensors</li>
+          <li>LEDs</li>
+          <li>resistors</li>
+          <li>Arduino Uno Microcontroller</li>
+        </ul>
+
+        <p>I wanted to add some feed-back, so the user would know when he got hit by another player, and when he fires, so I added a buzzer, a muzzle LED, and ‘hit’ LED. As you can see on the breadboard, the circuits for these are very simple at this point. They are just the output, plus a resistor to control the current that flows through the device. </p>
+        <figure><img src="assets/blog/Buzzer.jpg" height="250" width="333"><figcaption><center>A simple buzzer</center><figcaption></figcaption></figcaption></figure>
+        <figure><img src="assets/blog/IRR.jpg" height="250" width="333"><figcaption><center>An IR receiver</center><figcaption></figcaption></figcaption></figure>
+        <figure><img src="assets/blog/LED1.jpg" height="250" width="333"><figcaption><center>What will eventually become the "muzzle flash"</center><figcaption></figcaption></figcaption></figure>
+
+        <p>I used an Arduino Uno, since they are fairly cheap, and I can use just the chip instead of the whole development board. </p>
+
+        <p>The most important aspect of this project is the IR emitter, so I want to spend the most amount of time perfecting its circuit and making sure I have the largest possible range with an adequate to satisfactory battery life. Given the following formula: </p>
+        <figure><img src="assets/blog/transmission.jpg" height="185" width="600"><figcaption><center> "Vishay Semiconductors, General Overview of IR Transmission in Free Ambient"</center><figcaption></figcaption></figcaption></figure>
+        <br>
+        <p>We see that one possible way to increase the maximum transmission range is to increase the emitter intensity, which we can increase in two different ways. Either we can focus the beam of the IR LED, or we can increase the amount of current, and conversely the amount of power going to the LED. </p>
+
+        <p>
+        We can use a double-convex lens to focus the beam of the emitter.
+        Likewise, by the very nature of this project, we will not be
+        using the IR emitter for prolonged periods of time, we could
+        safely increase the current supplied for very short periods of
+        time without causing damage to the LED. We will set up the IR
+        emitter to only transmit once per an arbitrary period of time,
+        say, once per second. Within this period of one second, the
+        beam will only transmit data for a few milliseconds, and that
+        data will be sent in pulses as per the NEC protocol. This allows the LED to use more power without risk of damage. </p>
+
+        <p>
+        For the choice of lens, I used several websites and forums to
+        find the best size and shape, at the lowest possible cost, while
+        maintaining good quality and a reasonable size. Below is one
+        that I found particularly useful.
+        </p><p>
+
+        </p><p><a href="http://alumnus.caltech.edu/~leif/infratag/lens_choice.html"> Choosing a Lens</a></p>
+
+        <p>
+        This is an interesting page that describes different types of lens,
+        background information, and focal lengths in the context of IR laser
+        tag guns.
+        </p>
+
+
+        <p> Just as important as the hardware, is the software used.
+        The IR library that come preloaded with the Arduino seem to
+        have some issues with them, so I used the <a href="https://github.com/z3t0/Arduino-IRremote">library</a>
+        created by Ken Shirriff. Ken has done some fantastic work,
+        and his library is widely used by other laser gun enthusiasts,
+        and in various IR communication projects.
+        </p>
+
+
+
+        <br>
+        <p>To be continued as I work on this project.
+        </p>
+
+    </div>
+
+    <!-- Blog Sidebar Widgets Column -->
+    <div class="col-md-4">
+
+        <!-- Side Widget  -->
+        <div class="">
+            <section id="author_section"></section>
+        </div>
+
+        <!-- Blog Categories  -->
+        <div class="">
+            <section id="toc"></section>
+        </div>
+
+    </div>
+
+</div>
+<!-- /.row -->
+
+<hr>
+
+<script type="text/javascript">
+$("#author_section").load("html/blog/authors/herrerav.html");
+$("#author").show();
+$("#back_to_toc").click(function(){
+console.log("#back_to_toc" + " clicked");
+$("#content").load("html/blog/toc.html");
+$("#content").show();
+//toggle_bg_off();
+$(".dropdown-menu li a").removeClass("selected");
+$("#back_to_toc").addClass("selected");
+if ($("#back_to_toc").is("a")) {
+    $(".navbar-collapse").collapse("hide");
+}
+$(".dropdown-toggle").blur()
+});
+</script>

@@ -1,0 +1,4 @@
+"MSFT","Microsoft Corporation",63.2500,63.2099,"-0.5821%"
+"AAPL","Apple Inc.",127.99,128.49,"-0.20%"
+"GOOG","Alphabet Inc.",794.65,798.28,"+0.32%"
+"AMZN","Amazon.com, Inc.",836.5900,839.7233,"+0.8858%"
